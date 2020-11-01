@@ -1,0 +1,20 @@
+<mat-nav-list (click)="onClose()">
+    <a mat-list-item [routerLink]="['/signup']">
+      <mat-icon>face</mat-icon>
+      <span class="nav-caption">SignUp</span>
+    </a>
+    <a mat-list-item [routerLink]="['/login']">
+      <mat-icon>login</mat-icon>
+      <span class="nav-caption">Login</span>
+    </a>
+    <a mat-list-item [routerLink]="['/training']">
+      <mat-icon>fitness_center</mat-icon>
+      <span class="nav-caption">Traning</span>
+    </a>
+    <mat-list-item>
+      <button mat-icon-button>
+        <mat-icon>eject</mat-icon>
+        <span class="nav-caption">Logout</span>
+      </button>
+    </mat-list-item>
+  </mat-nav-list>
