@@ -33,8 +33,8 @@ export class TrainingService {
         })
     }
 
-    startExercise(selectedId: string) {
-        this.runningExercise = this.availableExercises.find(exercise => exercise.name === selectedId);
+    startExercise(selectedName: string) {
+        this.runningExercise = this.availableExercises.find(exercise => exercise.name === selectedName);
         this.exerciseChanged.next({ ...this.runningExercise });
     }
 
