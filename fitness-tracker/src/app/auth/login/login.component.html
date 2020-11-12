@@ -13,8 +13,8 @@
       <mat-error *ngIf="f.password.errors?.required">Missing password.</mat-error>
       <mat-error *ngIf="f.password.errors?.minlength">Password must be at least 6 characters</mat-error>
     </mat-form-field>
-    <button *ngIf="!isLoading" type="submit" mat-raised-button color="primary"
+    <button *ngIf="!(isLoading$ | async)" type="submit" mat-raised-button color="primary"
       [disabled]="loginForm.invalid">Submit</button>
-    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
   </form>
 </section>
