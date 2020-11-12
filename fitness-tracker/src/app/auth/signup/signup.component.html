@@ -19,6 +19,7 @@
       <mat-error *ngIf="bdInput.hasError('required')">Field must not be empty</mat-error>
     </mat-form-field>
     <mat-checkbox color="primary" ngModel name="agree" required>Agree to Terms and Conditions</mat-checkbox>
-    <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>
+    <button *ngIf="!isLoading" type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
   </form>
 </section>

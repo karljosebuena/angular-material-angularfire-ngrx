@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Subject } from 'rxjs/Subject';
+import { UIService } from '../shared/ui.service';
 import { TrainingService } from '../training/training.service';
 
 import { AuthData } from './auth-data.model';
@@ -12,7 +14,12 @@ export class AuthService {
     authChange = new Subject<boolean>();
     private isAuthenticaetd: boolean;
 
-    constructor(private router: Router, private afAuth: AngularFireAuth, private trainingService: TrainingService) {}
+    constructor(
+        private router: Router,
+        private afAuth: AngularFireAuth,
+        private trainingService: TrainingService,
+        private uiService: UIService,
+    ) { }
 
     initAuthListener() {
         this.afAuth.authState.subscribe(user => {
@@ -30,25 +37,35 @@ export class AuthService {
     }
 
     registerUser(authData: AuthData) {
+        this.uiService.loadingStateChanged.next(true);
         this.afAuth.auth.createUserWithEmailAndPassword(authData.email, authData.password)
-        .then(result => {
-            console.log(result)
-            this.authSuccessfully();
-        })
-        .catch(error => {
-            console.error(error);
-        })
-
+            .then(result => {
+                console.log(result)
+            })
+            .catch(error => {
+                this.uiService.showSnackBar(error.message, null, {
+                    duration: 3000,
+                });
+            })
+            .finally(() => {
+                this.uiService.loadingStateChanged.next(false);
+            })
     }
 
     login(authData: AuthData) {
+        this.uiService.loadingStateChanged.next(true);
         this.afAuth.auth.signInWithEmailAndPassword(authData.email, authData.password)
-        .then(result => {
-            console.log(result);
-        })
-        .catch(error => {
-            console.error(error);
-        });
+            .then(result => {
+                console.log(result);
+            })
+            .catch(error => {
+                this.uiService.showSnackBar(error.message, null, {
+                    duration: 3000,
+                });
+            })
+            .finally(() => {
+                this.uiService.loadingStateChanged.next(false);
+            })
     }
 
     logOut() {
