@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Subject } from 'rxjs/Subject';
@@ -7,7 +6,6 @@ import { UIService } from '../shared/ui.service';
 import { TrainingService } from '../training/training.service';
 
 import { AuthData } from './auth-data.model';
-import { User } from './user.model';
 
 @Injectable()
 export class AuthService {
@@ -31,7 +29,7 @@ export class AuthService {
                 this.trainingService.cancelSubscriptions();
                 this.isAuthenticaetd = false;
                 this.authChange.next(false);
-                this.router.navigate(['/login']);
+                this.router.navigate(['/']);
             }
         })
     }

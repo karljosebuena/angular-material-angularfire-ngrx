@@ -29,10 +29,10 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
+    AuthModule,
     AppRoutingModule,
     FlexLayoutModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AuthModule,
     AngularFirestoreModule,
 
   ],
