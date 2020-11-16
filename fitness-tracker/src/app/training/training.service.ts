@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { Subject } from 'rxjs/Subject';
 import { UIService } from '../shared/ui.service';
 import { Exercise } from './exercise.model';
 
@@ -10,16 +9,9 @@ import * as fromTraining from './training.reducer';
 import * as UI from '../shared/ui.actions';
 import * as Training from './training.actions';
 import { Store } from '@ngrx/store';
-// import { take } from 'rxjs/operators';
 
 @Injectable()
 export class TrainingService {
-    exerciseChanged = new Subject<Exercise>();
-    exercisesChanged = new Subject<Exercise[]>();
-    finishedExercisesChanged = new Subject<Exercise[]>();
-
-    private availableExercises: Exercise[] = [];
-    private runningExercise: Exercise;
     private fbSubs: Subscription[] = [];
 
     constructor(
@@ -49,7 +41,6 @@ export class TrainingService {
                 error => {
                     this.store.dispatch(new UI.StopLoading);
                     this.uiService.showSnackBar('Fetching exercise failed, please try again later.', null, 3000);
-                    this.exercisesChanged.next(null);
                 }
             ));
     }

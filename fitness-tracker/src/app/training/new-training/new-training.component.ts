@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { Exercise } from '../exercise.model';
 import { TrainingService } from '../training.service';
 
@@ -16,8 +16,6 @@ import { Store } from '@ngrx/store';
 export class NewTrainingComponent implements OnInit{
   availableExercises$: Observable<Exercise[]>;
   isLoading$: Observable<boolean>;
-
-  private exerciseSubscription: Subscription;
 
   constructor(
     private trainingService: TrainingService,
